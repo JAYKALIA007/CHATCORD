@@ -14,7 +14,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-//used to set "public" as a static folder so that we can access the frontend(html files) on our server
+//used to set "static" as a public folder so that we can access the frontend(html files) on our server
 app.use(express.static(path.join(__dirname, "public")));
 const botName = "ChatCord BOT";
 //what to do when a client connects, this shows whatever message we want to display
@@ -23,7 +23,8 @@ io.on("connection", (socket) => {
     const user = userJoin(socket.id, username, room);
 
     socket.join(user.room);
-    //use to welcome the current registered user ti chatcord
+
+    //use to welcome the current registered user to chatcord
 
     socket.emit("message", formatMessage(botName, "Welcome to CHATCORD")); //sends the message to the user only
 
